@@ -1,5 +1,6 @@
 package com.liuvlun.timer;
 
+import com.liuvlun.utils.BootStrapUtil;
 import io.netty.bootstrap.ServerBootstrap;
 import io.netty.channel.ChannelFuture;
 import io.netty.channel.ChannelInitializer;
@@ -22,7 +23,7 @@ public class TimeServer {
 
     public static void main(String[] args){
 
-
+        BootStrapUtil.serverStart(PORT,new TimeServerHandler());
 
 
     }
