@@ -2,10 +2,7 @@ package com.liuvlun.timer;
 
 import com.liuvlun.utils.BootStrapUtil;
 import io.netty.bootstrap.ServerBootstrap;
-import io.netty.channel.ChannelFuture;
-import io.netty.channel.ChannelInitializer;
-import io.netty.channel.ChannelOption;
-import io.netty.channel.EventLoopGroup;
+import io.netty.channel.*;
 import io.netty.channel.nio.NioEventLoopGroup;
 import io.netty.channel.socket.SocketChannel;
 import io.netty.channel.socket.nio.NioServerSocketChannel;
@@ -23,7 +20,10 @@ public class TimeServer {
 
     public static void main(String[] args){
 
-        BootStrapUtil.serverStart(PORT,new TimeServerHandler());
+
+        ChannelHandler[] handlers = {new TimeDecoder(),new TimeEncoder(),new TimeServerHandler()};
+
+        BootStrapUtil.serverStart(PORT,handlers);
 
 
     }

@@ -13,12 +13,8 @@ public class TimeServerHandler  extends ChannelInboundHandlerAdapter{
 
     @Override
     public void channelActive(final ChannelHandlerContext ctx) throws Exception {
-        ByteBuf time = ctx.channel().alloc().buffer(4);
-        int  intTime = (int) (System.currentTimeMillis()/1000L + 2208988800L);
-        time.writeInt(intTime);
 
-        final ChannelFuture f = ctx.writeAndFlush(time);
-
+        final ChannelFuture f = ctx.writeAndFlush(new UnixTime());
         f.addListener(new ChannelFutureListener(){
             public void operationComplete(ChannelFuture future) throws Exception {
                 assert f == future;

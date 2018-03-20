@@ -16,12 +16,8 @@ public class TimeClientHandler extends ChannelInboundHandlerAdapter {
     @Override
     public void channelRead(ChannelHandlerContext ctx, Object msg) throws Exception {
 
-        ByteBuf time = (ByteBuf) msg;
-        long longTime = (time.readUnsignedInt() - 2208988800L) * 1000L;
-
-        PrintUtil.sysPrintln(new Date(longTime).toLocaleString());
-
-        time.release();
+        UnixTime time = (UnixTime) msg;
+        PrintUtil.sysPrintln(time.toString());
 
     }
 
